@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bangladesh Adventure Foundation</title>
+<meta name="description" content="Bangladesh Adventure Foundation is a non-profit youth development organisation using travel, adventure and volunteer service to help young people grow.">
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Hind+Siliguri:wght@500&display=swap">
+<style>
+/* Layout: topographic survey sheet — contour-map hero, left-aligned expedition type, flag-green bands, field-notebook details */
+:root{
+  --paper:#EDF1EC;
+  --paper-2:#E1E8E2;
+  --card:#F7F9F6;
+  --ink:#12241D;
+  --muted:#4E6259;
+  --hill:#0B5E44;
+  --hill-deep:#083F2E;
+  --on-hill:#EAF3EE;
+  --signal:#D7263D;
+  --line:#C6D2C9;
+  --contour:rgba(11,94,68,.22);
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --bn:"Hind Siliguri","Noto Sans Bengali",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0D1613;--paper-2:#14211C;--card:#18261F;--ink:#E3ECE6;--muted:#9AB0A5;--hill:#3FA57E;--hill-deep:#0F2A21;--on-hill:#E3ECE6;--signal:#FF5B6E;--line:#25372F;--contour:rgba(95,190,150,.18);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0D1613;--paper-2:#14211C;--card:#18261F;--ink:#E3ECE6;--muted:#9AB0A5;--hill:#3FA57E;--hill-deep:#0F2A21;--on-hill:#E3ECE6;--signal:#FF5B6E;--line:#25372F;--contour:rgba(95,190,150,.18);color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:.95;margin:0;text-transform:uppercase}
+h2{font-size:clamp(2.4rem,6vw,4rem);font-weight:800}
+h3{font-size:1.6rem;font-weight:800;letter-spacing:.01em}
+p{margin:0}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:1.25rem;text-transform:uppercase;letter-spacing:.02em}
+.mark{width:40px;height:40px;flex:none;border-radius:50%;background:#fff;object-fit:contain;box-shadow:0 0 0 1px var(--line)}
+.links{display:flex;gap:20px;font-size:.9rem;font-weight:600}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--ink)}
+@media (max-width:720px){.links a:not(.cta-link){display:none}}
+.cta-link{color:var(--hill)!important}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#topo{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;padding-block:clamp(56px,10vw,112px) clamp(40px,7vw,72px);display:grid;gap:26px}
+.names{display:flex;align-items:center;gap:18px}
+.name-text{display:grid;gap:2px;min-width:0}
+.hero-logo{width:clamp(84px,14vw,120px);height:auto;aspect-ratio:1;max-width:100%;flex:none;border-radius:50%;background:#fff;object-fit:contain;padding:4px;box-shadow:0 0 0 1px var(--line),0 6px 18px rgba(0,0,0,.08)}
+.motto{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.en-name{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);text-transform:uppercase;letter-spacing:.03em;color:var(--hill);line-height:1.05}
+.bn{font-family:var(--bn);font-size:1.05rem;color:var(--hill);font-weight:500}
+@media (max-width:420px){.brand{font-size:1.05rem}}
+.hero h1{font-size:clamp(3.2rem,12vw,8.6rem);font-weight:900;line-height:.86;letter-spacing:-.005em}
+.hero h1 span{display:block}
+.hero h1 .accent{color:var(--hill)}
+.hero .lede{max-width:36rem;font-size:clamp(1.05rem,2vw,1.25rem)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;font-weight:700;font-size:.95rem;text-decoration:none;border:2px solid var(--ink);border-radius:2px}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--hill);border-color:var(--hill);color:var(--on-hill)}
+.btn.ghost:hover{background:var(--paper-2)}
+.coords{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:10px;border-top:1px dashed var(--line)}
+.coords b{color:var(--signal);font-weight:500}
+
+/* sections */
+section{padding-block:clamp(64px,9vw,108px)}
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:start}
+@media (max-width:820px){.split{grid-template-columns:1fr}}
+.text{display:grid;gap:18px;max-width:38rem;font-size:1.08rem}
+.pillars{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.pillars span{font-family:var(--mono);font-size:.8rem;padding:6px 12px;border:1px solid var(--hill);color:var(--hill);border-radius:999px}
+blockquote{margin:0;padding:4px 0 4px 18px;border-left:3px solid var(--hill);font-size:1.12rem;font-weight:500}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* programs */
+.alt{background:var(--paper-2);border-block:1px solid var(--line)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:40px}
+.head p{max-width:30rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:2px solid var(--ink)}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;padding:28px 24px 32px 0;border-bottom:1px solid var(--line)}
+.grid .item:nth-child(odd){border-right:1px solid var(--line)}
+.grid .item:nth-child(even){padding-left:24px}
+@media (max-width:700px){.grid .item:nth-child(odd){border-right:0}.grid .item:nth-child(even){padding-left:0}}
+.item svg{width:44px;height:44px;color:var(--hill)}
+.item .body{display:grid;gap:8px}
+.item p{color:var(--muted)}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--signal)}
+
+/* volunteer band */
+.band{background:var(--hill-deep);color:var(--on-hill)}
+.band .label{color:color-mix(in srgb,var(--on-hill) 70%,transparent)}
+.band h2{color:var(--on-hill)}
+.band .text p{color:color-mix(in srgb,var(--on-hill) 85%,transparent)}
+.ledger{display:grid;border-top:1px solid color-mix(in srgb,var(--on-hill) 25%,transparent)}
+.ledger div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:16px 0;border-bottom:1px solid color-mix(in srgb,var(--on-hill) 25%,transparent)}
+.ledger strong{font-family:var(--display);font-size:1.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:1.05}
+.ledger span{font-family:var(--mono);font-size:.76rem;opacity:.75;text-align:right}
+.ledger p{grid-column:1/-1;font-size:.95rem;opacity:.85}
+
+/* festival */
+.districts{display:flex;flex-wrap:wrap;gap:10px}
+.districts span{font-family:var(--display);font-weight:800;font-size:1.5rem;text-transform:uppercase;padding:6px 14px;border:2px solid var(--ink)}
+
+/* governance */
+.gov{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:820px){.gov{grid-template-columns:1fr}}
+.cert{background:var(--card);border:1px solid var(--line);padding:28px;display:grid;gap:18px;position:relative}
+.cert::after{content:"";position:absolute;inset:6px;border:1px solid var(--line);pointer-events:none}
+.cert dl{margin:0;display:grid;gap:14px}
+.cert dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cert dd{margin:2px 0 0;font-weight:600}
+.cert .regno{font-family:var(--mono);font-size:1.5rem;font-weight:500;color:var(--hill);letter-spacing:.02em}
+.ec{width:100%;border-collapse:collapse;font-size:.98rem}
+.ec caption{text-align:left;padding-bottom:12px}
+.ec th,.ec td{text-align:left;padding:12px 8px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.ec thead th{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:2px solid var(--ink)}
+.ec td:first-child{font-family:var(--mono);color:var(--muted);width:2.5rem;font-variant-numeric:tabular-nums}
+.ec td:nth-child(2){font-weight:600}
+.ec td:last-child{color:var(--muted)}
+.tablewrap{overflow-x:auto}
+.funds{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.funds span{font-size:.85rem;padding:5px 10px;background:var(--paper-2);border:1px solid var(--line);border-radius:2px}
+
+/* join */
+.paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);margin-bottom:56px}
+@media (max-width:760px){.paths{grid-template-columns:1fr}}
+.path{display:grid;gap:10px;align-content:start;padding:24px 24px 28px 0;border-bottom:1px solid var(--line)}
+.path + .path{padding-left:24px;border-left:1px solid var(--line)}
+@media (max-width:760px){.path + .path{padding-left:0;border-left:0}}
+.path p{color:var(--muted)}
+.contact{display:grid;border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:9rem minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+@media (max-width:520px){.row{grid-template-columns:minmax(0,1fr) auto}.row .label{grid-column:1/-1}}
+.row .val{font-size:1.05rem;font-weight:600;overflow-wrap:anywhere;user-select:all}
+.copy{font-family:var(--mono);font-size:.75rem;padding:6px 10px;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:2px;cursor:pointer}
+.copy:hover{border-color:var(--ink)}
+.copy.done{border-color:var(--hill);color:var(--hill)}
+.note{font-size:.85rem;color:var(--muted)}
+
+/* print / PDF export */
+@page{size:A4;margin:14mm 12mm}
+@media print{
+  :root,:root[data-theme="dark"]{
+    --paper:#FFFFFF;--paper-2:#F1F5F2;--card:#FFFFFF;--ink:#12241D;--muted:#4E6259;--hill:#0B5E44;--hill-deep:#083F2E;--on-hill:#EAF3EE;--signal:#D7263D;--line:#C6D2C9;--contour:rgba(11,94,68,.18);color-scheme:light}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{scroll-behavior:auto}
+  body{font-size:11pt;line-height:1.5}
+  body::before{display:none}
+  nav{position:static;backdrop-filter:none;background:var(--paper)}
+  .links,.copy,.actions{display:none!important}
+  section{padding-block:28px}
+  .hero .wrap{padding-block:32px 24px;gap:18px}
+  .hero h1{font-size:46pt}
+  .hero .lede{font-size:11.5pt}
+  .hero-logo{width:72px}
+  nav{display:none}
+  #about{break-inside:avoid;page-break-inside:avoid;padding-block:20px}
+  #about .text{gap:10px;font-size:10pt}
+  #about blockquote{font-size:10.5pt}
+  #about h2{font-size:22pt}
+  .hero .wrap{padding-block:16px 18px}
+  h2{font-size:28pt}
+  h3{font-size:15pt}
+  .head{margin-bottom:20px}
+  .split,.gov{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid .item:nth-child(odd){border-right:1px solid var(--line)}
+  .grid .item:nth-child(even){padding-left:20px}
+  .paths{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .path + .path{padding-left:18px;border-left:1px solid var(--line)}
+  .row{grid-template-columns:8rem minmax(0,1fr)}
+  .row .label{grid-column:auto}
+  section,header,.band{break-inside:auto}
+  .item,.path,.cert,.row,.ledger > div,blockquote,.funds,.districts,.names,.pillars,.text > p{break-inside:avoid;page-break-inside:avoid}
+  h1,h2,h3,.label,.head{break-after:avoid;page-break-after:avoid}
+  .head,.split > div:first-child{break-inside:avoid}
+  p{orphans:3;widows:3}
+  #work,#governance,#join{break-before:page;page-break-before:always}
+  .band,.alt{border:0}
+  a[href^="http"]::after{content:""}
+}
+
+footer{border-top:1px solid var(--line);padding-block:28px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img class="mark" src="logo.jpg" alt="Bangladesh Adventure Foundation logo" width="40" height="40">
+      <span>Bangladesh Adventure Foundation</span>
+    </a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#work">Our work</a>
+      <a href="#volunteer">Volunteer</a>
+      <a href="#governance">Governance</a>
+      <a class="cta-link" href="#join">Get involved</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="names">
+      <img class="hero-logo" src="logo.jpg" alt="" width="120" height="120">
+      <div class="name-text">
+      <p class="en-name">Bangladesh Adventure Foundation</p>
+      <p class="bn" lang="bn">বাংলাদেশ অ্যাডভেঞ্চার ফাউন্ডেশন</p>
+      <p class="motto">Life is adventure</p>
+      </div>
+    </div>
+    <h1><span>Young people</span><span class="accent">grow on</span><span>the road</span></h1>
+    <p class="lede">Bangladesh Adventure Foundation is a non-profit youth development organisation. We use travel, adventure and volunteer service to help young people build confidence, look after their mental health and give back to their communities.</p>
+    <div class="actions">
+      <a class="btn primary" href="#join">Become a volunteer →</a>
+      <a class="btn ghost" href="#work">See our work</a>
+    </div>
+    <div class="coords">
+      <span><b>●</b> Registered society · RJSC No. S-13232/2019</span>
+      <span>Non-profit · Non-political · NGO</span>
+      <span>Working nationwide</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap split">
+      <div>
+        <p class="label">Who we are</p>
+        <h2 style="margin-top:12px">Youth first, adventure as the method</h2>
+      </div>
+      <div class="text">
+        <p>We believe young people learn the most outside their comfort zone. A trek through the hills, a week in a village or a day spent helping after a flood teaches planning, patience, teamwork and empathy in a way a classroom rarely can.</p>
+        <blockquote>To promote adventure sports and activities among the youth of the country in order to build their personality and character by infusing in them a sense of discipline and national pride.<cite>Our founding objective · Memorandum of Association</cite></blockquote>
+        <p>Every programme we run is shaped by volunteers and open to young people from any background, anywhere in Bangladesh.</p>
+        <div class="pillars" aria-label="What we build">
+          <span>Confidence</span><span>Wellbeing</span><span>Service</span><span>Leadership</span><span>National pride</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="work">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label">Our work</p>
+          <h2 style="margin-top:12px">What we do</h2>
+        </div>
+        <p>Six areas of work, all aimed at the same outcome: capable, healthy young people who care about the country and its people.</p>
+      </div>
+      <div class="grid">
+        <article class="item">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="12" r="6"/><path d="M12 42 C12 30 18 24 24 24 S36 30 36 42"/><path d="M24 30 L24 42"/></svg>
+          <div class="body"><p class="tag">Training · Leadership</p><h3>Youth development</h3><p>Short and long courses in leadership, outdoor skills, first aid and social responsibility that prepare young people for work and community life.</p></div>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 40 C12 32 6 25 6 17 C6 11 11 7 16 7 C20 7 22 9 24 12 C26 9 28 7 32 7 C37 7 42 11 42 17 C42 25 36 32 24 40 Z"/><path d="M14 22 L20 22 L23 16 L27 28 L30 22 L34 22"/></svg>
+          <div class="body"><p class="tag">Mental health · Motivation</p><h3>Healing through travel</h3><p>Group trips, nature walks and camps that give young people a break from pressure, time to talk, and a renewed sense of purpose.</p></div>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 26 L14 20 L22 24 L30 18"/><path d="M30 18 L40 26 C42 28 40 31 38 30 L32 26"/><path d="M22 24 L28 30 C30 32 28 35 26 34 L18 28"/><path d="M14 20 L8 32 L16 38 L22 34"/></svg>
+          <div class="body"><p class="tag">Relief · Medical · Development</p><h3>Volunteer social work</h3><p>Volunteers support relief, medical and development projects alongside partner organisations, especially in remote and hill communities.</p></div>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 40 L8 8"/><path d="M8 40 L42 40"/><path d="M14 32 L22 22 L28 28 L38 14"/><circle cx="38" cy="14" r="2.5"/></svg>
+          <div class="body"><p class="tag">Surveys · Insight</p><h3>Research &amp; market studies</h3><p>Youth-led field research on young people's needs, tourism and local markets, giving volunteers real research experience and partners useful evidence.</p></div>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 40 L18 14 L26 28 L32 20 L44 40 Z"/><path d="M18 14 L22 21"/></svg>
+          <div class="body"><p class="tag">Hills · Rivers · Coast</p><h3>Adventure &amp; eco-tourism</h3><p>Camping, hiking, river cruising, rowing and study tours, plus cultural tours and ethnic food festivals that celebrate the country's diversity.</p></div>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 10 L20 10 C22 10 24 12 24 14 L24 40 C24 38 22 36 20 36 L6 36 Z"/><path d="M42 10 L28 10 C26 10 24 12 24 14 L24 40 C24 38 26 36 28 36 L42 36 Z"/></svg>
+          <div class="body"><p class="tag">Workshops · Publications</p><h3>Seminars &amp; knowledge</h3><p>Workshops, seminars and roundtables at national and international level, plus books and media on Bangladesh's cultural and natural heritage.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="volunteer">
+    <div class="wrap split">
+      <div class="text">
+        <p class="label">The heart of the Foundation</p>
+        <h2>Volunteers do the work</h2>
+        <p>We are a volunteer-driven organisation. Students and young professionals plan trips, run training days, collect research data and turn up when communities need help. In return they gain skills, friendships and a record of real service.</p>
+      </div>
+      <div class="ledger" aria-label="Ways to volunteer">
+        <div><strong>Field volunteer</strong><span>Trips · Camps</span><p>Help lead groups on treks, camps and study tours.</p></div>
+        <div><strong>Community responder</strong><span>Relief · Health</span><p>Join relief, medical and development drives with partner agencies.</p></div>
+        <div><strong>Youth researcher</strong><span>Surveys · Data</span><p>Collect and analyse data for our research and market studies.</p></div>
+        <div><strong>Peer supporter</strong><span>Wellbeing</span><p>Be a friendly face for young people joining our wellbeing trips.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="festival">
+    <div class="wrap split">
+      <div>
+        <p class="label">From our record</p>
+        <h2 style="margin-top:12px">An adventure festival across the hills</h2>
+      </div>
+      <div class="text">
+        <p>Working with the Chittagong Hill Tracts Development Board, the Foundation helped run a five-day adventure festival across all three hill districts, bringing young people from around the country together with hill communities.</p>
+        <div class="districts" aria-label="Festival venues"><span>Rangamati</span><span>Khagrachari</span><span>Bandarban</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="governance">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label">Governance &amp; transparency</p>
+          <h2 style="margin-top:12px">Registered and accountable</h2>
+        </div>
+        <p>All income and property of the Foundation is used only for its objectives. No part of it is paid out to members.</p>
+      </div>
+      <div class="gov">
+        <div class="cert">
+          <p class="label">Certificate of Registration of Societies</p>
+          <p class="regno">S-13232/2019</p>
+          <dl>
+            <div><dt>Registered under</dt><dd>Societies Registration Act, 1860 (Act XXI)</dd></div>
+            <div><dt>Registering authority</dt><dd>Registrar of Joint Stock Companies &amp; Firms (RJSC), Bangladesh</dd></div>
+            <div><dt>Date of registration</dt><dd>28 October 2019, Dhaka</dd></div>
+            <div><dt>Status</dt><dd>Non-profit, non-political NGO</dd></div>
+            <div><dt>Working area</dt><dd>Throughout Bangladesh</dd></div>
+          </dl>
+        </div>
+        <div style="display:grid;gap:32px;min-width:0">
+          <div style="display:grid;gap:10px">
+            <p class="label">How we are governed</p>
+            <p>The Foundation is run by an elected Executive Committee and a General Body made up of its founding members and invited members. The Executive Committee sets our programmes and builds partnerships with organisations at home and abroad that share our objectives.</p>
+          </div>
+          <div style="display:grid;gap:10px">
+            <p class="label">How we are funded</p>
+            <div class="funds">
+              <span>Membership fees &amp; subscriptions</span>
+              <span>Donations from individuals &amp; well-wishers</span>
+              <span>Government &amp; international agencies</span>
+              <span>Business community partners</span>
+              <span>Services &amp; publications</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label">Get involved</p>
+          <h2 style="margin-top:12px">Walk with us</h2>
+        </div>
+        <p>Call, email or visit us. Tell us who you are and how you'd like to help, and we'll find a place for you.</p>
+      </div>
+      <div class="paths">
+        <div class="path"><h3>Volunteer</h3><p>Open to students and young people across Bangladesh. Join a trip, a training day or a community project.</p></div>
+        <div class="path"><h3>Partner</h3><p>Schools, universities, NGOs and agencies can work with us on youth programmes, research and relief.</p></div>
+        <div class="path"><h3>Support</h3><p>Donations and sponsorship help us take young people who couldn't otherwise afford it.</p></div>
+      </div>
+      <div class="split">
+        <div class="text"><p class="label">Contact</p><p>We reply to every message. For partnerships and sponsorship, please mention your organisation.</p></div>
+        <div class="contact">
+          <div class="row"><span class="label">Phone</span><span class="val" id="v-phone">01730-054888</span><button class="copy" type="button" data-copy="v-phone">Copy</button></div>
+          <div class="row"><span class="label">Email</span><span class="val" id="v-email">adventure.bd@gmail.com</span><button class="copy" type="button" data-copy="v-email">Copy</button></div>
+          <div class="row"><span class="label">Address</span><span class="val" id="v-addr">Flat A2 T2 04 02, Bijoy Rakeen City, Mirpur 15, Dhaka</span><button class="copy" type="button" data-copy="v-addr">Copy</button></div>
+          <div class="row"><span class="label">Facebook</span><a class="val" href="https://www.facebook.com/adventurefoundation.net" target="_blank" rel="noopener">facebook.com/adventurefoundation.net</a><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Bangladesh Adventure Foundation · Registered society, RJSC No. S-13232/2019</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const el=document.getElementById(b.dataset.copy);const t=el.textContent.trim();
+    const ok=()=>{b.textContent='Copied';b.classList.add('done');setTimeout(()=>{b.textContent='Copy';b.classList.remove('done')},1600)};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'};
+    try{navigator.clipboard.writeText(t).then(ok,fallback)}catch(e){fallback()}
+  });
+});
+
+(function(){
+  const c=document.getElementById('topo');if(!c)return;const ctx=c.getContext('2d');
+  const P=[];for(let i=0;i<512;i++)P[i]=Math.random();
+  const h=(x,y)=>P[((x*73856093)^(y*19349663))&511];
+  const sm=t=>t*t*(3-2*t);
+  function n(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=sm(x-xi),yf=sm(y-yi);
+    const a=h(xi,yi),b=h(xi+1,yi),c2=h(xi,yi+1),d=h(xi+1,yi+1);
+    return a+(b-a)*xf+(c2-a)*yf+(a-b-c2+d)*xf*yf}
+  const f=(x,y)=>n(x,y)*.6+n(x*2.1+5,y*2.1+3)*.3+n(x*4.3,y*4.3)*.1;
+  function draw(){
+    const w=c.clientWidth,hh=c.clientHeight,dpr=Math.min(window.devicePixelRatio||1,2);
+    c.width=w*dpr;c.height=hh*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,hh);
+    const col=getComputedStyle(document.documentElement).getPropertyValue('--contour').trim();
+    const s=14,cols=Math.ceil(w/s)+1,rows=Math.ceil(hh/s)+1,sc=.0045,g=[];
+    for(let j=0;j<rows;j++){g[j]=[];for(let i=0;i<cols;i++){const x=i*s,y=j*s;g[j][i]=f(x*sc,y*sc)+(x/w)*.35;}}
+    for(let L=0;L<22;L++){const lv=.2+L*.05;ctx.strokeStyle=col;ctx.lineWidth=L%5===0?1.6:.9;ctx.beginPath();
+      for(let j=0;j<rows-1;j++)for(let i=0;i<cols-1;i++){
+        const a=g[j][i],b=g[j][i+1],cc=g[j+1][i+1],d=g[j+1][i];
+        const k=(a>lv)*8+(b>lv)*4+(cc>lv)*2+(d>lv);if(k===0||k===15)continue;
+        const x=i*s,y=j*s,lp=(p,q)=>(lv-p)/(q-p);
+        const T=[x+s*lp(a,b),y],R=[x+s,y+s*lp(b,cc)],B=[x+s*lp(d,cc),y+s],Lf=[x,y+s*lp(a,d)];
+        const seg=(p,q)=>{ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1])};
+        switch(k){case 1:case 14:seg(Lf,B);break;case 2:case 13:seg(B,R);break;case 3:case 12:seg(Lf,R);break;
+          case 4:case 11:seg(T,R);break;case 5:seg(Lf,T);seg(B,R);break;case 6:case 9:seg(T,B);break;
+          case 7:case 8:seg(Lf,T);break;case 10:seg(T,R);seg(Lf,B);break;}
+      }
+      ctx.stroke();
+    }
+  }
+  draw();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(draw,150)});
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',draw);
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+</script>
+</body>
+</html>
