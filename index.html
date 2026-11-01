@@ -69,15 +69,37 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .en-name{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);text-transform:uppercase;letter-spacing:.03em;color:var(--hill);line-height:1.05}
 .bn{font-family:var(--bn);font-size:1.05rem;color:var(--hill);font-weight:500}
 @media (max-width:420px){.brand{font-size:1.05rem}}
-.hero h1{font-size:clamp(3.2rem,12vw,8.6rem);font-weight:900;line-height:.86;letter-spacing:-.005em}
-.hero h1 span{display:block}
-.hero h1 .accent{color:var(--hill)}
 .hero .lede{max-width:36rem;font-size:clamp(1.05rem,2vw,1.25rem)}
 .actions{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;font-weight:700;font-size:.95rem;text-decoration:none;border:2px solid var(--ink);border-radius:2px}
 .btn.primary{background:var(--ink);color:var(--paper)}
 .btn.primary:hover{background:var(--hill);border-color:var(--hill);color:var(--on-hill)}
 .btn.ghost:hover{background:var(--paper-2)}
+/* hero slider */
+.hero .wrap{grid-template-columns:minmax(0,1fr)}
+.slider,.slides,.slide,.slide-text{min-width:0}
+.slider{display:grid;gap:22px}
+.slider:focus{outline:none}
+.slides{display:grid}
+.slide{grid-area:1/1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,48px);align-items:center;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.slide.is-active{opacity:1;visibility:visible;transition:opacity .6s ease,visibility 0s}
+@media (prefers-reduced-motion:reduce){.slide,.slide.is-active{transition:none}}
+.slide-text{display:grid;gap:22px;align-content:center}
+.slide-title{font-size:clamp(3rem,8vw,6.2rem);font-weight:900;line-height:.86;letter-spacing:-.005em}
+.slide-title span{display:block}
+.slide-title .accent{color:var(--hill)}
+.slide-media{position:relative;margin:0;aspect-ratio:4/5;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 80%,transparent);display:grid;place-items:center;overflow:hidden}
+.slide-media::after{content:"";position:absolute;inset:8px;border:1px dashed var(--line);pointer-events:none}
+.slide-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.slide-media .ph{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:16px;text-align:center}
+@media (max-width:820px){.slide{grid-template-columns:1fr}.slide-media{aspect-ratio:16/9;order:-1}}
+.slider-controls{display:flex;align-items:center;gap:10px}
+.sbtn{width:40px;height:40px;display:grid;place-items:center;font:600 1rem/1 var(--body);background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:2px;cursor:pointer}
+.sbtn:hover{background:var(--ink);color:var(--paper)}
+.sbtn.pause{margin-left:auto;font-size:.7rem;letter-spacing:-.1em}
+.dots{display:flex;gap:8px;padding-inline:6px}
+.dot{width:28px;height:6px;padding:0;border:0;border-radius:0;background:var(--line);cursor:pointer}
+.dot[aria-current="true"]{background:var(--hill)}
 .coords{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:10px;border-top:1px dashed var(--line)}
 .coords b{color:var(--signal);font-weight:500}
 
@@ -170,7 +192,9 @@ blockquote cite{display:block;margin-top:8px;font-style:normal;font-family:var(-
   .links,.copy,.actions{display:none!important}
   section{padding-block:28px}
   .hero .wrap{padding-block:32px 24px;gap:18px}
-  .hero h1{font-size:46pt}
+  .slide-title{font-size:46pt}
+  .slide:not(:first-child),.slider-controls,.slide-media{display:none!important}
+  .slide{opacity:1;visibility:visible;grid-template-columns:1fr}
   .hero .lede{font-size:11.5pt}
   .hero-logo{width:72px}
   nav{display:none}
@@ -234,11 +258,67 @@ footer a{color:var(--muted)}
       <p class="motto">Life is adventure</p>
       </div>
     </div>
-    <h1><span>Young people</span><span class="accent">grow on</span><span>the road</span></h1>
-    <p class="lede">Bangladesh Adventure Foundation is a non-profit youth development organisation. We use travel, adventure and volunteer service to help young people build confidence, look after their mental health and give back to their communities.</p>
-    <div class="actions">
-      <a class="btn primary" href="#join">Become a volunteer →</a>
-      <a class="btn ghost" href="#work">See our work</a>
+    <div class="slider" id="hero-slider" role="region" aria-roledescription="carousel" aria-label="Highlights" tabindex="-1">
+      <div class="slides">
+        <!-- Slide 1 — add your photo as images/slide-1.jpg -->
+        <div class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
+          <div class="slide-text">
+            <h1 class="slide-title"><span>Young people</span><span class="accent">grow on</span><span>the road</span></h1>
+            <p class="lede">Bangladesh Adventure Foundation is a non-profit youth development organisation. We use travel, adventure and volunteer service to help young people build confidence, look after their mental health and give back to their communities.</p>
+            <div class="actions">
+              <a class="btn primary" href="#join">Become a volunteer →</a>
+              <a class="btn ghost" href="#work">See our work</a>
+            </div>
+          </div>
+          <figure class="slide-media">
+            <span class="ph">Photo · images/slide-1.jpg</span>
+            <img src="images/slide-1.jpg" alt="" loading="eager" onerror="this.remove()">
+          </figure>
+        </div>
+
+        <!-- Slide 2 — add your photo as images/slide-2.jpg -->
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+          <div class="slide-text">
+            <h2 class="slide-title"><span>Healing</span><span class="accent">through</span><span>travel</span></h2>
+            <p class="lede">Group trips, nature walks and camps that give young people a break from pressure, time to talk, and a renewed sense of purpose.</p>
+            <div class="actions">
+              <a class="btn primary" href="#work">Our programmes →</a>
+              <a class="btn ghost" href="#join">Join a trip</a>
+            </div>
+          </div>
+          <figure class="slide-media">
+            <span class="ph">Photo · images/slide-2.jpg</span>
+            <img src="images/slide-2.jpg" alt="" loading="lazy" onerror="this.remove()">
+          </figure>
+        </div>
+
+        <!-- Slide 3 — add your photo as images/slide-3.jpg -->
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+          <div class="slide-text">
+            <h2 class="slide-title"><span>Volunteers</span><span class="accent">do the</span><span>work</span></h2>
+            <p class="lede">Students and young professionals plan trips, run training days, collect research data and turn up when communities need help.</p>
+            <div class="actions">
+              <a class="btn primary" href="#volunteer">Ways to volunteer →</a>
+              <a class="btn ghost" href="#join">Get in touch</a>
+            </div>
+          </div>
+          <figure class="slide-media">
+            <span class="ph">Photo · images/slide-3.jpg</span>
+            <img src="images/slide-3.jpg" alt="" loading="lazy" onerror="this.remove()">
+          </figure>
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="sbtn" type="button" data-dir="-1" aria-label="Previous slide">←</button>
+        <div class="dots" role="group" aria-label="Choose slide">
+          <button type="button" class="dot" aria-label="Slide 1" aria-current="true"></button>
+          <button type="button" class="dot" aria-label="Slide 2"></button>
+          <button type="button" class="dot" aria-label="Slide 3"></button>
+        </div>
+        <button class="sbtn" type="button" data-dir="1" aria-label="Next slide">→</button>
+        <button class="sbtn pause" type="button" aria-label="Pause slideshow">❚❚</button>
+      </div>
     </div>
     <div class="coords">
       <span><b>●</b> Registered society · RJSC No. S-13232/2019</span>
@@ -417,6 +497,35 @@ document.querySelectorAll('.copy').forEach(b=>{
     try{navigator.clipboard.writeText(t).then(ok,fallback)}catch(e){fallback()}
   });
 });
+
+(function(){
+  const root=document.getElementById('hero-slider');if(!root)return;
+  const slides=[...root.querySelectorAll('.slide')],dots=[...root.querySelectorAll('.dot')];
+  const pauseBtn=root.querySelector('.pause');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DELAY=6500;let i=0,timer=null,userPaused=reduce,hovering=false;
+  function go(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>{const on=k===i;s.classList.toggle('is-active',on);s.toggleAttribute('inert',!on);s.setAttribute('aria-hidden',String(!on))});
+    dots.forEach((d,k)=>d.setAttribute('aria-current',String(k===i)));
+  }
+  function stop(){clearInterval(timer);timer=null}
+  function start(){stop();if(!userPaused&&!hovering&&!document.hidden)timer=setInterval(()=>go(i+1),DELAY)}
+  function setPaused(p){userPaused=p;pauseBtn.textContent=p?'▶':'❚❚';pauseBtn.setAttribute('aria-label',p?'Play slideshow':'Pause slideshow');p?stop():start()}
+  root.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{go(i+Number(b.dataset.dir));start()}));
+  dots.forEach((d,k)=>d.addEventListener('click',()=>{go(k);start()}));
+  pauseBtn.addEventListener('click',()=>setPaused(!userPaused));
+  root.addEventListener('mouseenter',()=>{hovering=true;stop()});
+  root.addEventListener('mouseleave',()=>{hovering=false;start()});
+  root.addEventListener('focusin',()=>{hovering=true;stop()});
+  root.addEventListener('focusout',e=>{if(!root.contains(e.relatedTarget)){hovering=false;start()}});
+  root.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){go(i-1);start()}else if(e.key==='ArrowRight'){go(i+1);start()}});
+  let x0=null;
+  root.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  root.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40){go(i+(dx<0?1:-1));start()}});
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+  go(0);setPaused(userPaused);
+})();
 
 (function(){
   const c=document.getElementById('topo');if(!c)return;const ctx=c.getContext('2d');
